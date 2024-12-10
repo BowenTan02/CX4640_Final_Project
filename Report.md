@@ -1,33 +1,35 @@
 ---
 Name: Bowen Tan
-Topic: Finite Differences
-Title: Background, Types, and Applications of Finite Differences
+Topic: Finite Difference Methods
+Title: Background, Types, and Applications of Finite Difference Methods
 ---
 # Finite Differences
 
 ## Table of Contents
 - [Overview](#Overview)
-- [Historical Development](#Historical-Development)
-- [Finite Differences Overview](#Finite-Differences-Overview)
+- [Background](#Background)
+- [Finite Difference Methods Overview](#Finite-Difference-Methods-Overview)
 - [Formulation](#Formulation)
-- [Finite Differences Options](#Finite-Differences-Options)
+- [Finite Difference Methods Options](#Finite-Difference-Methods-Options)
 - [Advanced Methods](#Advanced-Methods)
 - [Applications and Performance](#Applications-and-Performance)
 - [Implementation](#Implementation)
 - [References](#References)
 
 ## Overview
-Finite difference methods (FDM) represent a fundamental approach in numerical analysis for solving differential equations by approximating derivatives using discrete difference equations.
+Finite difference methods (FDM) serve as a cornerstone in numerical analysis, particularly for solving partial differential equations and boundary value problems. These methods effectively transform continuous differential problems into discrete approximations, making them computationally efficient.
 
-## Historical-Development
-The modern foundation of finite difference methods was established in 1928 through the seminal work of Courant, Friedrichs, and Lewy, who introduced the fundamental concepts of stability and convergence in numerical solutions[7]. Their work established crucial principles like the CFL stability condition and laid the groundwork for future developments in numerical analysis[7].
+The fundamental principle involves replacing continuous derivatives with discrete approximations. This process typically involves converting differential equations into algebraic equations, establishing a grid over the solution domain, and applying appropriate boundary conditions.
 
-## Finite-Differences-Overview
+## Background
+
+
+## Finite-Difference-Methods-Overview
 
 **Basic Principle**
 Finite differences approximate derivatives by replacing continuous differential operators with discrete approximations over a mesh or grid. The accuracy and stability of these approximations depend on both the spatial mesh size (h) and temporal step size (τ) when dealing with time-dependent problems[6].
 
-## Finite-Differences-Options
+## Finite-Difference-Methods-Options
 
 **Forward Differences**
 The forward difference approximation looks ahead in the grid:
