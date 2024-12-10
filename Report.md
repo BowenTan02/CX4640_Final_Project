@@ -79,12 +79,12 @@ def central_difference_2nd_order(f, x, h):
 
 The choice of finite difference method should be guided by the specific requirements of the problem, including accuracy needs, computational resources, and the nature of the solution being sought.
 
-## Citations:
-[1] https://www.semanticscholar.org/paper/d79e1ecc3b689c443568d30ee439291740572785
-[2] https://www.semanticscholar.org/paper/10516540740b17914254479267d6afe416f7f54d
-[3] https://www.semanticscholar.org/paper/3e141a8c2701f7e147849e96ce79a4753055f90e
-[4] https://www.semanticscholar.org/paper/da28661218d7e60bd7152c1235b10c20460c1ccb
-[5] https://www.semanticscholar.org/paper/95b1257214beb0b8425cd4da49e97f432918bb0c
-[6] https://arxiv.org/abs/2003.03951
-[7] https://www.semanticscholar.org/paper/b0fed6f3ca401094c14b42e1c36cf110611dcc24
-[8] https://www.semanticscholar.org/paper/5d0e71436d6e56b966ebe819eb8df5d6ed3e7b35
+## References:
+1. https://www.semanticscholar.org/paper/d79e1ecc3b689c443568d30ee439291740572785
+2. https://www.semanticscholar.org/paper/10516540740b17914254479267d6afe416f7f54d
+3. https://www.semanticscholar.org/paper/3e141a8c2701f7e147849e96ce79a4753055f90e
+4. https://www.semanticscholar.org/paper/da28661218d7e60bd7152c1235b10c20460c1ccb
+5. https://www.semanticscholar.org/paper/95b1257214beb0b8425cd4da49e97f432918bb0c
+6. https://arxiv.org/abs/2003.03951
+7. https://www.semanticscholar.org/paper/b0fed6f3ca401094c14b42e1c36cf110611dcc24
+8. https://www.semanticscholar.org/paper/5d0e71436d6e56b966ebe819eb8df5d6ed3e7b35
