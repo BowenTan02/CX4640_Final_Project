@@ -79,7 +79,7 @@ def central_difference_2nd_order(f, x, h):
 
 The choice of finite difference method should be guided by the specific requirements of the problem, including accuracy needs, computational resources, and the nature of the solution being sought.
 
-Citations:
+** Citations:
 [1] https://www.semanticscholar.org/paper/d79e1ecc3b689c443568d30ee439291740572785
 [2] https://www.semanticscholar.org/paper/10516540740b17914254479267d6afe416f7f54d
 [3] https://www.semanticscholar.org/paper/3e141a8c2701f7e147849e96ce79a4753055f90e
