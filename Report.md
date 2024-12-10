@@ -1,14 +1,33 @@
+---
+Name: Bowen Tan
+Topic: Finite Differences
+Title: Background, Types, and Applications of Finite Differences
+---
+# Finite Differences
+
+## Table of Contents
+- [Overview](#Overview)
+- [Historical Development](#Historical-Development)
+- [Finite Differences Overview](#Finite-Differences-Overview)
+- [Common Applications](#Common-Applications)
+- [Formulation](#Formulation)
+- [Finite Differences Options](#Finite-Differences-Options)
+- [Advanced Methods](#Advanced-Methods)
+- [Applications and Performance](#Applications-and-Performance)
+- [References](#References)
+
+## Overview
 Finite difference methods (FDM) represent a fundamental approach in numerical analysis for solving differential equations by approximating derivatives using discrete difference equations.
 
-## Historical Development
+## Historical-Development
 The modern foundation of finite difference methods was established in 1928 through the seminal work of Courant, Friedrichs, and Lewy, who introduced the fundamental concepts of stability and convergence in numerical solutions[7]. Their work established crucial principles like the CFL stability condition and laid the groundwork for future developments in numerical analysis[7].
 
-## Fundamental Concepts
+## Finite-Differences-Overview
 
 **Basic Principle**
 Finite differences approximate derivatives by replacing continuous differential operators with discrete approximations over a mesh or grid. The accuracy and stability of these approximations depend on both the spatial mesh size (h) and temporal step size (τ) when dealing with time-dependent problems[6].
 
-## Types of Finite Differences
+## Finite-Differences-Options
 
 **Forward Differences**
 The forward difference approximation looks ahead in the grid:
@@ -28,7 +47,7 @@ Central differences use symmetric points around x:
 f'(x) ≈ (f(x + h) - f(x - h)) / (2h)
 ```
 
-## Advanced Methods
+## Advanced-Methods
 
 **Compact Finite Differences**
 Compact schemes offer higher-order accuracy while maintaining a smaller computational stencil. The fourth-order compact finite difference (4cFD) methods have shown particular promise in handling problems with oscillatory solutions[6].
@@ -36,7 +55,7 @@ Compact schemes offer higher-order accuracy while maintaining a smaller computat
 **Nonstandard Finite Differences**
 These methods are specifically designed for certain types of problems where traditional schemes might fail. They can preserve important properties like positivity and boundedness of solutions[8].
 
-## Applications and Performance
+## Applications-and-Performance
 
 **Strengths**
 - Simple implementation and intuitive understanding
