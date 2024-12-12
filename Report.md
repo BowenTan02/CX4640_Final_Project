@@ -9,8 +9,10 @@ Title: Background, Types, and Applications of Finite Difference Methods
 - [Overview](#Overview)
 - [Finite Difference Methods Background and Overview](#Finite-Difference-Methods-Background-and-Overview)
 - [Formulation](#Formulation)
-- [Finite Difference Methods Options](#Finite-Difference-Methods-Options)
+- [Finite Difference Methods Basic Options](#Finite-Difference-Methods-Basic-Options)
+- [Finite Difference Methods High Orders](#Finite-Difference-Methods-High-Orders)
 - [Advanced Methods](#Advanced-Methods)
+- [Error Analysis](#Error-Analysis)
 - [Applications and Performance](#Applications-and-Performance)
 - [Implementation](#Implementation)
 - [References](#References)
@@ -18,11 +20,11 @@ Title: Background, Types, and Applications of Finite Difference Methods
 ## Overview
 Finite difference methods (FDM) serve as a cornerstone in numerical analysis, particularly for solving partial differential equations and boundary value problems. These methods effectively transform continuous differential problems into discrete approximations, making them computationally efficient.
 
-The fundamental principle involves replacing continuous derivatives with discrete approximations. This process typically involves converting differential equations into algebraic equations, establishing a grid over the solution domain, and applying appropriate boundary conditions.
+The fundamental principle involves replacing continuous derivatives with discrete approximations. This process typically involves converting differential equations into algebraic equations, establishing a grid over the solution domain, and applying appropriate boundary conditions [1].
 
 ## Finite-Difference-Methods-Background-and-Overview
 
-Finite differences approximate derivatives by replacing continuous differential operators with discrete approximations over a mesh or grid. The accuracy and stability of these approximations depend on both the spatial mesh size and temporal step size when dealing with time-dependent problems [1].
+Finite differences approximate derivatives by replacing continuous differential operators with discrete approximations over a mesh or grid. The accuracy and stability of these approximations depend on both the spatial mesh size and temporal step size when dealing with time-dependent problems [2].
 
 ### Mathematical Foundation
 For a given function *f(x)*, the derivative *f'(x)* with $x = a$ is defined as: 
@@ -48,7 +50,7 @@ In practice, finite difference methods involve discretizing the domain of intere
 ### Error Analysis
 The truncation of the Taylor series in finite difference approximations introduces errors. The magnitude of these errors depends on the step size and the order of the approximation. Generally, smaller step sizes lead to more accurate approximations, but at the cost of increased computational effort.
 
-## Finite-Difference-Methods-Options
+## Finite-Difference-Methods-Basic-Options
 
 ### Forward Differences
 For forward differences with step size *h*, we can express the Taylor expansion series as:
@@ -57,20 +59,81 @@ $$ f(x + h) = f(x) + hf'(x) + \frac{h^2}{2!}f''(x) + \frac{h^3}{3!}f'''(x) + ...
 
 Rearranging this series to isolate *f'(x)* yields:
 
-$$ f'(x) = \frac{f(x+h) - f(x)}{h} - \frac{h}{2}f''(x) - \frac{h^2}{6}f'''(x) + O(h^3) $$
+$$ f'(x) = \frac{f(x+h) - f(x)}{h} - \frac{h}{2}f''(x) - \frac{h^2}{6}f'''(x) + O(h^3) \approx \frac{f(x+h) - f(x)}{h}$$
 
+## Backward Difference
+For backward differences with step size *h*, we can express the Taylor expansion series as:
 
-**Backward Differences**
-The backward difference uses previous points:
-```python
-f'(x) ≈ (f(x) - f(x - h)) / h
-```
+$$ f(x - h) = f(x) - hf'(x) + \frac{h^2}{2!}f''(x) - \frac{h^3}{3!}f'''(x) + ...$$
 
-**Central Differences**
-Central differences use symmetric points around x:
-```python
-f'(x) ≈ (f(x + h) - f(x - h)) / (2h)
-```
+Rearranging this series to isolate *f'(x)* yields:
+
+$$ f'(x) = \frac{f(x) - f(x-h)}{h} + \frac{h}{2}f''(x) - \frac{h^2}{6}f'''(x) + O(h^3) \approx \frac{f(x) - f(x-h)}{h}$$
+
+### Central Differences
+For central differences with step size *h*, we can express the Taylor expansion series in both forward and backward directions:
+
+$$ f(x + h) = f(x) + hf'(x) + \frac{h^2}{2!}f''(x) + \frac{h^3}{3!}f'''(x) + \frac{h^4}{4!}f^{(4)}(x) + ... $$
+$$ f(x - h) = f(x) - hf'(x) + \frac{h^2}{2!}f''(x) - \frac{h^3}{3!}f'''(x) + \frac{h^4}{4!}f^{(4)}(x) + ... $$
+
+Subtracting these equations and rearranging to isolate *f'(x)* yields:
+
+$$ f'(x) = \frac{f(x+h) - f(x-h)}{2h} - \frac{h^2}{6}f'''(x) + O(h^4) \approx \frac{f(x+h) - f(x-h)}{2h} $$
+
+## Finite-Difference-Methods-High-Orders
+### Forward Difference for Second Derivatives
+Start with Taylor expansions for two forward points:
+
+$$ f(x + h) = f(x) + hf'(x) + \frac{h^2}{2!}f''(x) + \frac{h^3}{3!}f'''(x) + \frac{h^4}{4!}f^{(4)}(x) + O(h^5) $$
+
+$$ f(x + 2h) = f(x) + 2hf'(x) + \frac{4h^2}{2!}f''(x) + \frac{8h^3}{3!}f'''(x) + \frac{16h^4}{4!}f^{(4)}(x) + O(h^5) $$
+
+To eliminate f'(x), multiply the first equation by -2 and add to the second equation:
+
+$$ -2f(x + h) + f(x + 2h) = -2f(x) - 2hf'(x) - h^2f''(x) - \frac{2h^3}{3!}f'''(x) - \frac{2h^4}{4!}f^{(4)}(x) + $$
+$$ f(x) + 2hf'(x) + 2h^2f''(x) + \frac{8h^3}{3!}f'''(x) + \frac{16h^4}{4!}f^{(4)}(x) + ...$$
+
+Rearranging and solving for f''(x):
+
+$$ f''(x) = \frac{f(x+2h) - 2f(x+h) + f(x)}{h^2} + O(h) $$
+
+### Backward Difference for Second Derivatives
+
+Start with Taylor expansions for two backward points:
+
+$$ f(x - h) = f(x) - hf'(x) + \frac{h^2}{2!}f''(x) - \frac{h^3}{3!}f'''(x) + \frac{h^4}{4!}f^{(4)}(x) + O(h^5) $$
+
+$$ f(x - 2h) = f(x) - 2hf'(x) + \frac{4h^2}{2!}f''(x) - \frac{8h^3}{3!}f'''(x) + \frac{16h^4}{4!}f^{(4)}(x) + O(h^5) $$
+
+To eliminate f'(x), multiply the first equation by -2 and add to the second equation:
+
+$$ -2f(x - h) + f(x - 2h) = -2f(x) + 2hf'(x) - h^2f''(x) + \frac{2h^3}{3!}f'''(x) - \frac{2h^4}{4!}f^{(4)}(x) + $$
+$$ f(x) - 2hf'(x) + 2h^2f''(x) - \frac{8h^3}{3!}f'''(x) + \frac{16h^4}{4!}f^{(4)}(x) + ... $$
+
+Rearranging and solving for f''(x):
+
+$$ f''(x) = \frac{f(x-2h) - 2f(x-h) + f(x)}{h^2} + O(h) $$
+
+This gives us the backward difference approximation for the second derivative with first-order accuracy, similar to the forward difference case.
+
+### Central Difference for Second Derivatives
+Start with Taylor expansions for two forward points:
+
+$$ f(x + h) = f(x) + hf'(x) + \frac{h^2}{2!}f''(x) + \frac{h^3}{3!}f'''(x) + \frac{h^4}{4!}f^{(4)}(x) + ...$$
+
+$$ f(x - h) = f(x) - hf'(x) + \frac{h^2}{2!}f''(x) - \frac{h^3}{3!}f'''(x) + \frac{h^4}{4!}f^{(4)}(x) - ...$$
+
+To eliminate f'(x), add the first equation to the second equation:
+
+$$ f(x + h) + f(x - h) = 2f(x) + h^2f''(x) + \frac{2h^4}{4!}f^{(4)}(x) + ...$$
+
+Rearranging and solving for f''(x):
+
+$$ f''(x) = \frac{f(x+h) - 2f(x+h) + f(x-h)}{h^2} + O(h^4)$$
+
+### Higher-Order Finite Difference Approximation
+The higher order finite difference approximation is addressed in [*Numerical Resolution of Differential Equations Using the Finite Difference Method in the Real and Complex Domain*](https://www.mdpi.com/2227-7390/12/12/1870) by Almeida Magalhães et al. [3]. This research extends the traditional real-domain approximations to a quadrant approximation in the complex plane, providing comprehensive coverage of real and complex finite difference equations along with their respective error orders, making it a valuable reference for engineering applications [3].
+
 
 ## Advanced-Methods
 
@@ -99,10 +162,40 @@ The CFL (Courant-Friedrichs-Lewy) condition must be satisfied for explicit time-
 $$ \Delta t \leq C \frac{\Delta x}{v} $$
 where C is the Courant number and v is the wave speed.
 
-**Error Analysis**
-For time-dependent problems, error bounds typically depend on both spatial and temporal discretization:
-$$ \text{Error} = O(h^p + \tau^q) $$
-where p and q represent the order of accuracy in space and time respectively[6].
+## Error-Analysis
+### Basic Truncation Error Analysis
+The truncation error (TE) for forward difference comes directly from the Taylor series expansion:
+
+$$ \text{TE} = -\frac{h}{2}f''(x) - \frac{h^2}{6}f'''(x) + O(h^3) $$
+
+where h is the step size. Thus, the truncation error is bounded by $\frac{Mh}{2}$, where *M* bounds $|f''(t)|$ for *t* near *x*
+
+### Basic Rounding Error Analysis
+The rounding error (RE) for forward difference is bounded by:
+
+$$ \text{RE} \leq \frac{2\epsilon}{h} $$
+
+where ε (epsilon) is the bound on errors in function values and *h* is the step size
+
+### Basic Error Minimization Analysis
+The total error in forward difference approximation combines both truncation and rounding errors regarding step size *h*:
+
+$$ \text{Total Error} = O(h) + O(\frac{\epsilon}{h}) $$
+
+Let's say the truncation error is bounded by *Mh*, where *M* bounds $|f''(t)|$ for *t* near *x* and the rounding error by $\frac{2 \epsilon}{h}$. Then:
+
+$$ \text{Total Error} = Mh + \frac{2\epsilon}{h} $$
+
+To find the minimum, we differentiate with respect to *h* and set the diffrentiation equation to zero:
+
+$$ \frac{d}{dh}(\text{Total Error}) = M - \frac{2\epsilon}{h^2} = 0 $$
+
+Solving for *h* yields:
+
+$$ h = \sqrt{\frac{2\epsilon}{M}} $$
+
+This value of *h* represents the optimal step size that balances truncation and rounding errors, minimizing the total error in forward difference approximations.
+
 
 ## Modern Developments
 
@@ -124,11 +217,8 @@ def central_difference_2nd_order(f, x, h):
 The choice of finite difference method should be guided by the specific requirements of the problem, including accuracy needs, computational resources, and the nature of the solution being sought.
 
 ## References:
-1. Thomas, J.W. (1997) Numerical Partial Differential Equations: Finite Difference Methods. Springer-Verlag, Berlin.
-2. https://www.semanticscholar.org/paper/d79e1ecc3b689c443568d30ee439291740572785
-3. https://www.semanticscholar.org/paper/10516540740b17914254479267d6afe416f7f54d
-4. https://www.semanticscholar.org/paper/3e141a8c2701f7e147849e96ce79a4753055f90e
-5. https://www.semanticscholar.org/paper/da28661218d7e60bd7152c1235b10c20460c1ccb
-6. https://www.semanticscholar.org/paper/95b1257214beb0b8425cd4da49e97f432918bb0c
-8. https://www.semanticscholar.org/paper/b0fed6f3ca401094c14b42e1c36cf110611dcc24
-9. https://www.semanticscholar.org/paper/5d0e71436d6e56b966ebe819eb8df5d6ed3e7b35
+1. Thomée, V. (2001). From finite differences to finite elements a short history of numerical analysis of partial differential equations. Journal of Computational and Applied Mathematics, 128, 1-54. https://www.sciencedirect.com/science/article/pii/S0377042700005070?via%3Dihub
+2. Thomas, J.W. (1997) Numerical Partial Differential Equations: Finite Difference Methods. Springer-Verlag, Berlin.
+3. Almeida Magalhães, A.L.M., Brito, P.P., Lamon, G.P.d.S., Júnior, P.A.A.M., Magalhães, C.A., Almeida Magalhães P.H.M., Magalhães P.A.A. (2024). Numerical Resolution of Differential Equations Using the Finite Difference Method in the Real and Complex Domain. Mathematics. 12(12):1870. https://doi.org/10.3390/math12121870
+4. Loeb, D.E., & Rota, G. (1995). Recent contributions to the calculus of finite differences: a survey. arXiv: Combinatorics. https://doi.org/10.48550/arXiv.math/9502210
+5. Bournez, O. (2019). Complexity theory with Discrete Differential Equations/Finite differences. https://api.semanticscholar.org/CorpusID:14799803
