@@ -47,7 +47,7 @@ This rearrangement forms the basis for various finite difference approximations.
 ### Discretization Process
 In practice, finite difference methods involve discretizing the domain of interest into a grid or mesh. The continuous derivatives in differential equations are then replaced by discrete approximations using function values at these grid points. The choice of grid points and the way these approximations are constructed lead to different types of finite difference schemes.
 
-### Error Analysis
+### Error Analysis Overview
 The truncation of the Taylor series in finite difference approximations introduces errors. The magnitude of these errors depends on the step size and the order of the approximation. Generally, smaller step sizes lead to more accurate approximations, but at the cost of increased computational effort.
 
 ## Finite-Difference-Methods-Types
