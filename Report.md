@@ -8,7 +8,6 @@ Title: Background, Types, and Applications of Finite Difference Methods
 ## Table of Contents
 - [Overview](#Overview)
 - [Finite Difference Methods Background and Overview](#Finite-Difference-Methods-Background-and-Overview)
-- [Formulation](#Formulation)
 - [Finite Difference Methods Basic Options](#Finite-Difference-Methods-Basic-Options)
 - [Finite Difference Methods High Orders](#Finite-Difference-Methods-High-Orders)
 - [Advanced Methods](#Advanced-Methods)
