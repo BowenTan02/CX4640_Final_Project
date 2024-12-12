@@ -148,7 +148,13 @@ The Compact Finite Difference Scheme offers several significant advantages in nu
 
 
 ### Nonstandard Finite Differences
-These methods are specifically designed for certain types of problems where traditional schemes might fail. They can preserve important properties like positivity and boundedness of solutions.
+Nonstandard finite difference (NSFD) methods represent a specialized class of numerical techniques designed to overcome limitations of traditional schemes in specific problem domains, which are particularly valuable when dealing with dynamical systems in biology, physics, and engineering where preserving certain mathematical properties is crucial. 
+
+NSFD methods excel at maintaining essential qualitative features of the original differential equations, such as positivity of solutions, boundedness, and stability properties near equilibrium points [5]. They have demonstrated remarkable success in handling productive-destructive systems and autonomous dynamical systems, offering both computational efficiency and straightforward implementation [5].
+
+A key strength of NSFD methods lies in their ability to preserve the global asymptotic stability of equilibrium points through the maintenance of quadratic Lyapunov functions, regardless of step size selection[6]. This characteristic makes them particularly effective for solving complex problems like the Burgers-Huxley equation, where maintaining solution positivity, boundedness, and monotonicity is essential[6].
+
+The practical implementation of NSFD methods involves careful construction of discrete models that preserve the essential mathematical and physical properties of the continuous systems they approximate [6]. 
 
 ## Applications-and-Performance
 
@@ -228,5 +234,7 @@ The choice of finite difference method should be guided by the specific requirem
 2. Thomas, J.W. (1997) Numerical Partial Differential Equations: Finite Difference Methods. Springer-Verlag, Berlin.
 3. Almeida Magalhães, A.L.M., Brito, P.P., Lamon, G.P.d.S., Júnior, P.A.A.M., Magalhães, C.A., Almeida Magalhães P.H.M., Magalhães P.A.A. (2024). Numerical Resolution of Differential Equations Using the Finite Difference Method in the Real and Complex Domain. Mathematics. 12(12):1870. https://doi.org/10.3390/math12121870
 4. Lele, S.K. (1992). Compact finite difference schemes with spectral-like resolution. Journal of Computational Physics. 103, 1:16-42. https://doi.org/10.1016/0021-9991(92)90324-R.
-5. Loeb, D.E., & Rota, G. (1995). Recent contributions to the calculus of finite differences: a survey. arXiv: Combinatorics. https://doi.org/10.48550/arXiv.math/9502210
-6. Bournez, O. (2019). Complexity theory with Discrete Differential Equations/Finite differences. https://api.semanticscholar.org/CorpusID:14799803
+5. Kojouharov, H.V. (2015). Nonstandard Finite-Difference Methods for Dynamical Systems in Biology. Biomath Communications, 2. https://api.semanticscholar.org/CorpusID:119476395
+6. Hoang, M.T. (2023). Nonstandard finite difference methods preserving general quadratic Lyapunov functions. arXiv: Numerical Analysis. https://arxiv.org/abs/2312.01471
+7. Loeb, D.E., & Rota, G. (1995). Recent contributions to the calculus of finite differences: a survey. arXiv: Combinatorics. https://doi.org/10.48550/arXiv.math/9502210
+8. Bournez, O. (2019). Complexity theory with Discrete Differential Equations/Finite differences. https://api.semanticscholar.org/CorpusID:14799803
