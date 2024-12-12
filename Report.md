@@ -82,21 +82,28 @@ $$ f'(x) = \frac{f(x+h) - f(x-h)}{2h} - \frac{h^2}{6}f'''(x) + O(h^4) \approx \f
 
 ## Error-Analysis
 ### Basic Truncation Error Analysis
-The truncation error (TE) for forward difference comes directly from the Taylor series expansion:
+The truncation error (TE) for forward and backward difference methods comes directly from the Taylor series expansion:
 
 $$ \text{TE} = -\frac{h}{2}f''(x) - \frac{h^2}{6}f'''(x) + O(h^3) $$
 
-where h is the step size. Thus, the truncation error is bounded by $\frac{Mh}{2}$, where *M* bounds $|f''(t)|$ for *t* near *x*
+where *h* is the step size. Thus, the truncation error is bounded by *Mh*, where *M* bounds $|f''(t)|$ for *t* near *x*.
+
+For central difference methods,
+
+$$ \text{TE} = -\frac{h^2}{6}f'''(x) + O(h^4) $$
+
+where *h* is the step size. Thus, the truncation error is bounded by $Mh^2$, where M bounds $|f'''(t)|$ for *t* near *x*.
+
 
 ### Basic Rounding Error Analysis
-The rounding error (RE) for forward difference is bounded by:
+The rounding error (RE) for above finite difference methods is bounded by:
 
 $$ \text{RE} \leq \frac{2\epsilon}{h} $$
 
 where ε (epsilon) is the bound on errors in function values and *h* is the step size
 
 ### Basic Error Minimization Analysis
-The total error in forward difference approximation combines both truncation and rounding errors regarding step size *h*:
+The total error in forward and backward difference approximation combines both truncation and rounding errors regarding step size *h*:
 
 $$ \text{Total Error} = O(h) + O(\frac{\epsilon}{h}) $$
 
@@ -112,7 +119,25 @@ Solving for *h* yields:
 
 $$ h = \sqrt{\frac{2\epsilon}{M}} $$
 
+Similarly, the total error for central difference approximation regarding step size *h*:
+
+$$ \text{Total Error} = Mh^2 + \frac{2\epsilon}{h} $$
+
+To find the minimum, we differentiate with respect to *h* and set the diffrentiation equation to zero:
+
+$$ \frac{d}{dh}(\text{Total Error}) = 2Mh - \frac{2\epsilon}{h^2} = 0 $$
+
+Solving for h yields the optimal step size:
+
+$$ h = \sqrt[3]{\frac{\epsilon}{M}} $$
+
 This value of *h* represents the optimal step size that balances truncation and rounding errors, minimizing the total error in forward difference approximations.
+
+In numerical approximations of derivatives using finite differences, there exists a fundamental trade-off between truncation and rounding errors. As the step size *h* decreases, the truncation error diminishes, with first derivatives showing error proportional to *h* (or $h^2$). This initial reduction in step size leads to more accurate approximations. However, this improvement has a practical limit due to rounding errors, which are bounded by $\frac{2ε}{h}$, where ε represents machine precision. When *h* becomes sufficiently small, the rounding error begins to dominate the total error, effectively negating the benefits of reduced truncation error.
+
+This limitation becomes particularly pronounced when computing higher-order derivatives. Higher-order approximations are more susceptible to numerical instability as *h* decreases, encountering computational difficulties sooner than lower-order derivatives. This increased sensitivity stems from the amplification of rounding errors through successive derivative calculations, making the computation of higher-order derivatives inherently more challenging in numerical implementations. The balance between these competing error sources necessitates careful selection of step size, especially when dealing with higher-order derivatives where the window of optimal step sizes becomes increasingly narrow.
+
+![](error_analysis.png)
 
 ## Finite-Difference-Methods-High-Orders
 ### Forward Difference for Second Derivatives
