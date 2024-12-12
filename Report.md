@@ -8,12 +8,13 @@ Title: Background, Types, and Applications of Finite Difference Methods
 ## Table of Contents
 - [Overview](#Overview)
 - [Finite Difference Methods Background and Overview](#Finite-Difference-Methods-Background-and-Overview)
-- [Finite Difference Methods Basic Options](#Finite-Difference-Methods-Basic-Options)
+- [Finite Difference Methods Types](#Finite-Difference-Methods-Types)
+- [Error Analysis](#Error-Analysis)
 - [Finite Difference Methods High Orders](#Finite-Difference-Methods-High-Orders)
 - [Compact Finite Differences](#Compact-Finite-Differences)
-- [Error Analysis](#Error-Analysis)
+- [Nonstandard Finite Differences](#Nonstandard-Finite-Differences)
 - [Applications and Performance](#Applications-and-Performance)
-- [Implementation](#Implementation)
+- [Implementation and Considerations](#Implementation-and-Considerations)
 - [References](#References)
 
 ## Overview
@@ -49,7 +50,7 @@ In practice, finite difference methods involve discretizing the domain of intere
 ### Error Analysis
 The truncation of the Taylor series in finite difference approximations introduces errors. The magnitude of these errors depends on the step size and the order of the approximation. Generally, smaller step sizes lead to more accurate approximations, but at the cost of increased computational effort.
 
-## Finite-Difference-Methods-Basic-Options
+## Finite-Difference-Methods-Types
 
 ### Forward Differences
 For forward differences with step size *h*, we can express the Taylor expansion series as:
@@ -78,6 +79,40 @@ $$ f(x - h) = f(x) - hf'(x) + \frac{h^2}{2!}f''(x) - \frac{h^3}{3!}f'''(x) + \fr
 Subtracting these equations and rearranging to isolate *f'(x)* yields:
 
 $$ f'(x) = \frac{f(x+h) - f(x-h)}{2h} - \frac{h^2}{6}f'''(x) + O(h^4) \approx \frac{f(x+h) - f(x-h)}{2h} $$
+
+## Error-Analysis
+### Basic Truncation Error Analysis
+The truncation error (TE) for forward difference comes directly from the Taylor series expansion:
+
+$$ \text{TE} = -\frac{h}{2}f''(x) - \frac{h^2}{6}f'''(x) + O(h^3) $$
+
+where h is the step size. Thus, the truncation error is bounded by $\frac{Mh}{2}$, where *M* bounds $|f''(t)|$ for *t* near *x*
+
+### Basic Rounding Error Analysis
+The rounding error (RE) for forward difference is bounded by:
+
+$$ \text{RE} \leq \frac{2\epsilon}{h} $$
+
+where ε (epsilon) is the bound on errors in function values and *h* is the step size
+
+### Basic Error Minimization Analysis
+The total error in forward difference approximation combines both truncation and rounding errors regarding step size *h*:
+
+$$ \text{Total Error} = O(h) + O(\frac{\epsilon}{h}) $$
+
+Let's say the truncation error is bounded by *Mh*, where *M* bounds $|f''(t)|$ for *t* near *x* and the rounding error by $\frac{2 \epsilon}{h}$. Then:
+
+$$ \text{Total Error} = Mh + \frac{2\epsilon}{h} $$
+
+To find the minimum, we differentiate with respect to *h* and set the diffrentiation equation to zero:
+
+$$ \frac{d}{dh}(\text{Total Error}) = M - \frac{2\epsilon}{h^2} = 0 $$
+
+Solving for *h* yields:
+
+$$ h = \sqrt{\frac{2\epsilon}{M}} $$
+
+This value of *h* represents the optimal step size that balances truncation and rounding errors, minimizing the total error in forward difference approximations.
 
 ## Finite-Difference-Methods-High-Orders
 ### Forward Difference for Second Derivatives
@@ -147,7 +182,7 @@ where α is the scheme parameter, *a* and *b* are coefficients chosen for desire
 The Compact Finite Difference Scheme offers several significant advantages in numerical computations. From a resolution perspective, it demonstrates spectral-like characteristics, providing enhanced resolution of high-frequency components while significantly reducing numerical dispersion [4]. This results in notably improved accuracy per step size compared to traditional methods. On the computational front, the scheme's efficiency stems from its compact structure, utilizing a smaller stencil size than explicit schemes [4]. This compact nature not only simplifies the handling of boundary conditions but also contributes to improved stability properties, making it particularly valuable for complex numerical simulations.
 
 
-### Nonstandard Finite Differences
+## Nonstandard-Finite-Differences
 Nonstandard finite difference (NSFD) methods represent a specialized class of numerical techniques designed to overcome limitations of traditional schemes in specific problem domains, which are particularly valuable when dealing with dynamical systems in biology, physics, and engineering where preserving certain mathematical properties is crucial. 
 
 NSFD methods excel at maintaining essential qualitative features of the original differential equations, such as positivity of solutions, boundedness, and stability properties near equilibrium points [5]. They have demonstrated remarkable success in handling productive-destructive systems and autonomous dynamical systems, offering both computational efficiency and straightforward implementation [5].
@@ -168,53 +203,12 @@ The practical implementation of NSFD methods involves careful construction of di
 - May struggle with complex geometries
 - Can face stability issues in certain conditions
 
-## Special Cases and Considerations
+## Implementation-and-Considerations
 
 **Stability Conditions**
 The CFL (Courant-Friedrichs-Lewy) condition must be satisfied for explicit time-stepping schemes to maintain stability[7]. For example, in wave equations:
 $$ \Delta t \leq C \frac{\Delta x}{v} $$
 where C is the Courant number and v is the wave speed.
-
-## Error-Analysis
-### Basic Truncation Error Analysis
-The truncation error (TE) for forward difference comes directly from the Taylor series expansion:
-
-$$ \text{TE} = -\frac{h}{2}f''(x) - \frac{h^2}{6}f'''(x) + O(h^3) $$
-
-where h is the step size. Thus, the truncation error is bounded by $\frac{Mh}{2}$, where *M* bounds $|f''(t)|$ for *t* near *x*
-
-### Basic Rounding Error Analysis
-The rounding error (RE) for forward difference is bounded by:
-
-$$ \text{RE} \leq \frac{2\epsilon}{h} $$
-
-where ε (epsilon) is the bound on errors in function values and *h* is the step size
-
-### Basic Error Minimization Analysis
-The total error in forward difference approximation combines both truncation and rounding errors regarding step size *h*:
-
-$$ \text{Total Error} = O(h) + O(\frac{\epsilon}{h}) $$
-
-Let's say the truncation error is bounded by *Mh*, where *M* bounds $|f''(t)|$ for *t* near *x* and the rounding error by $\frac{2 \epsilon}{h}$. Then:
-
-$$ \text{Total Error} = Mh + \frac{2\epsilon}{h} $$
-
-To find the minimum, we differentiate with respect to *h* and set the diffrentiation equation to zero:
-
-$$ \frac{d}{dh}(\text{Total Error}) = M - \frac{2\epsilon}{h^2} = 0 $$
-
-Solving for *h* yields:
-
-$$ h = \sqrt{\frac{2\epsilon}{M}} $$
-
-This value of *h* represents the optimal step size that balances truncation and rounding errors, minimizing the total error in forward difference approximations.
-
-
-## Modern Developments
-
-Recent research has focused on developing hybrid methods that combine finite differences with other numerical techniques. These developments include applications in optimization problems for industrial systems[3] and advanced modeling of complex physical phenomena[1].
-
-## Implementation
 
 **Algorithm Selection Guidelines**
 - Use central differences for general-purpose applications requiring moderate accuracy
