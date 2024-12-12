@@ -217,16 +217,16 @@ A key strength of NSFD methods lies in their ability to preserve the global asym
 The practical implementation of NSFD methods involves careful construction of discrete models that preserve the essential mathematical and physical properties of the continuous systems they approximate [6]. 
 
 ## Applications-and-Performance
+Finite difference methods demonstrate several notable strengths and limitations in practical applications.
 
-**Strengths**
-- Simple implementation and intuitive understanding
-- Efficient for regular geometries
-- Well-suited for parallel computing
+### Advantages
+Their primary advantage lies in their straightforward implementation and intuitive mathematical foundation, making them accessible to both newcomers and experienced practitioners. These methods perform particularly well when applied to problems with regular geometric domains, offering computational efficiency through their structured approach [7]. Additionally, their inherent structure makes them highly amenable to parallel computing implementations, allowing for effective distribution of computational loads across multiple processors [7].
 
-**Limitations**
-- Accuracy depends heavily on grid resolution
-- May struggle with complex geometries
-- Can face stability issues in certain conditions
+### Limitations
+However, these methods also face certain inherent limitations that must be carefully considered. The accuracy of finite difference approximations is intrinsically tied to step/grid resolution, requiring finer step sizes for improved precision, which can significantly increase computational costs. When dealing with complex geometries or irregular boundaries, these methods often encounter challenges in maintaining accuracy and stability, as the regular grid structure may not adequately conform to intricate domain shapes [7]. Furthermore, stability issues can arise in certain conditions, particularly in time-dependent problems where the choice of time step size becomes crucial for maintaining solution accuracy and preventing numerical instabilities [7].
+
+### Performance
+The method's performance characteristics make it particularly well-suited for applications in computational fluid dynamics, heat transfer analysis, and electromagnetic simulations where regular geometries predominate [1]. However, for problems involving complex boundaries or requiring adaptive mesh refinement, alternative numerical methods might be more appropriate [2]. Understanding these strengths and limitations is crucial for selecting the most suitable numerical approach for specific applications.
 
 ## Implementation-and-Considerations
 
