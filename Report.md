@@ -14,7 +14,7 @@ Title: Background, Types, and Applications of Finite Difference Methods
 - [Compact Finite Differences](#Compact-Finite-Differences)
 - [Nonstandard Finite Differences](#Nonstandard-Finite-Differences)
 - [Applications and Performance](#Applications-and-Performance)
-- [Implementation and Considerations](#Implementation-and-Considerations)
+- [Algorithm Selection](#Algorithm-Selection)
 - [References](#References)
 
 ## Overview
@@ -228,25 +228,16 @@ However, these methods also face certain inherent limitations that must be caref
 ### Performance
 The method's performance characteristics make it particularly well-suited for applications in computational fluid dynamics, heat transfer analysis, and electromagnetic simulations where regular geometries predominate [1]. However, for problems involving complex boundaries or requiring adaptive mesh refinement, alternative numerical methods might be more appropriate [2]. Understanding these strengths and limitations is crucial for selecting the most suitable numerical approach for specific applications.
 
-## Implementation-and-Considerations
+## Algorithm-Selection
+The selection of an appropriate finite difference method requires careful consideration of multiple factors to optimize numerical solutions. 
 
-**Stability Conditions**
-The CFL (Courant-Friedrichs-Lewy) condition must be satisfied for explicit time-stepping schemes to maintain stability[7]. For example, in wave equations:
-$$ \Delta t \leq C \frac{\Delta x}{v} $$
-where C is the Courant number and v is the wave speed.
+For general-purpose applications where moderate accuracy suffices, central difference schemes typically provide an optimal balance between computational efficiency and precision. These schemes offer second-order accuracy and are particularly effective for problems without severe constraints on solution properties.
 
-**Algorithm Selection Guidelines**
-- Use central differences for general-purpose applications requiring moderate accuracy
-- Consider compact schemes when high accuracy is needed with minimal computational overhead
-- Apply nonstandard methods for problems with special properties that need preservation
+When applications demand higher accuracy while maintaining computational efficiency, compact finite difference schemes emerge as the preferred choice. These methods achieve higher-order accuracy using smaller computational stencils, making them especially valuable in problems requiring precise resolution [4]. Their ability to provide spectral-like resolution with relatively modest computational overhead makes them particularly attractive for applications in computational aeroacoustics and turbulence simulations [4].
 
-**Pseudocode for Basic Implementation**
-```python
-def central_difference_2nd_order(f, x, h):
-    return (f[x + 1] - 2*f[x] + f[x - 1]) / (h*h)
-```
+Nonstandard finite difference methods become essential when dealing with problems that require preservation of specific mathematical or physical properties. These specialized schemes are particularly valuable in situations where maintaining solution positivity, boundedness, or other qualitative features is crucial, such as in biological systems or chemical reaction models [5]. 
 
-The choice of finite difference method should be guided by the specific requirements of the problem, including accuracy needs, computational resources, and the nature of the solution being sought.
+The final selection of a finite difference method must carefully weigh several key factors: the required accuracy of the solution, available computational resources, the mathematical nature of the problem, and any specific solution properties that must be preserved throughout the computation.
 
 ## References:
 1. Thomée, V. (2001). From finite differences to finite elements a short history of numerical analysis of partial differential equations. Journal of Computational and Applied Mathematics, 128, 1-54. https://www.sciencedirect.com/science/article/pii/S0377042700005070?via%3Dihub
@@ -256,4 +247,3 @@ The choice of finite difference method should be guided by the specific requirem
 5. Kojouharov, H.V. (2015). Nonstandard Finite-Difference Methods for Dynamical Systems in Biology. Biomath Communications, 2. https://api.semanticscholar.org/CorpusID:119476395
 6. Hoang, M.T. (2023). Nonstandard finite difference methods preserving general quadratic Lyapunov functions. arXiv: Numerical Analysis. https://arxiv.org/abs/2312.01471
 7. Loeb, D.E., & Rota, G. (1995). Recent contributions to the calculus of finite differences: a survey. arXiv: Combinatorics. https://doi.org/10.48550/arXiv.math/9502210
-8. Bournez, O. (2019). Complexity theory with Discrete Differential Equations/Finite differences. https://api.semanticscholar.org/CorpusID:14799803
