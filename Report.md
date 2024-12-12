@@ -10,7 +10,7 @@ Title: Background, Types, and Applications of Finite Difference Methods
 - [Finite Difference Methods Background and Overview](#Finite-Difference-Methods-Background-and-Overview)
 - [Finite Difference Methods Basic Options](#Finite-Difference-Methods-Basic-Options)
 - [Finite Difference Methods High Orders](#Finite-Difference-Methods-High-Orders)
-- [Advanced Methods](#Advanced-Methods)
+- [Compact Finite Differences](#Compact-Finite-Differences)
 - [Error Analysis](#Error-Analysis)
 - [Applications and Performance](#Applications-and-Performance)
 - [Implementation](#Implementation)
@@ -133,38 +133,22 @@ $$ f''(x) = \frac{f(x+h) - 2f(x+h) + f(x-h)}{h^2} + O(h^4)$$
 ### Higher-Order Finite Difference Approximation
 The higher order finite difference approximation is addressed in [*Numerical Resolution of Differential Equations Using the Finite Difference Method in the Real and Complex Domain*](https://www.mdpi.com/2227-7390/12/12/1870) by Almeida Magalhães et al. [3]. This research extends the traditional real-domain approximations to a quadrant approximation in the complex plane, providing comprehensive coverage of real and complex finite difference equations along with their respective error orders, making it a valuable reference for engineering applications [3].
 
-
-## Advanced-Methods
-### Compact Finite Differences
+## Compact-Finite-Differences
 Compact finite difference schemes, also known as Padé schemes, provide high-order accuracy using smaller stencils compared to explicit schemes. These methods achieve this by solving an implicit system of equations for the derivatives.
 
-## Mathematical Formulation
-
-### Basic Compact Scheme
+### Mathematical Formulation
 A typical fourth-order compact scheme for first derivatives takes the form [4]:
 
 ![](compact_fd.png) 
 
-where:
-- α is the scheme parameter
-- a and b are coefficients chosen for desired accuracy
-- h is the grid spacing
+where α is the scheme parameter, *a* and *b* are coefficients chosen for desired accuracy, and *h* is the step size.
 
-## Advantages
-
-**Spectral-like Resolution**
-- Better resolution of high-frequency components
-- Reduced numerical dispersion
-- Improved accuracy per grid point
-
-**Computational Benefits**
-- Smaller stencil size compared to explicit schemes
-- Better handling of boundary conditions
-- Enhanced stability properties
+### Advantages
+The Compact Finite Difference Scheme offers several significant advantages in numerical computations. From a resolution perspective, it demonstrates spectral-like characteristics, providing enhanced resolution of high-frequency components while significantly reducing numerical dispersion [4]. This results in notably improved accuracy per step size compared to traditional methods. On the computational front, the scheme's efficiency stems from its compact structure, utilizing a smaller stencil size than explicit schemes [4]. This compact nature not only simplifies the handling of boundary conditions but also contributes to improved stability properties, making it particularly valuable for complex numerical simulations.
 
 
-**Nonstandard Finite Differences**
-These methods are specifically designed for certain types of problems where traditional schemes might fail. They can preserve important properties like positivity and boundedness of solutions[8].
+### Nonstandard Finite Differences
+These methods are specifically designed for certain types of problems where traditional schemes might fail. They can preserve important properties like positivity and boundedness of solutions.
 
 ## Applications-and-Performance
 
