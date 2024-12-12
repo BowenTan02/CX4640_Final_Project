@@ -135,9 +135,33 @@ The higher order finite difference approximation is addressed in [*Numerical Res
 
 
 ## Advanced-Methods
+### Compact Finite Differences
+Compact finite difference schemes, also known as Padé schemes, provide high-order accuracy using smaller stencils compared to explicit schemes. These methods achieve this by solving an implicit system of equations for the derivatives.
 
-**Compact Finite Differences**
-Compact schemes offer higher-order accuracy while maintaining a smaller computational stencil. The fourth-order compact finite difference (4cFD) methods have shown particular promise in handling problems with oscillatory solutions[6].
+## Mathematical Formulation
+
+### Basic Compact Scheme
+A typical fourth-order compact scheme for first derivatives takes the form [4]:
+
+![](compact_fd.png) 
+
+where:
+- α is the scheme parameter
+- a and b are coefficients chosen for desired accuracy
+- h is the grid spacing
+
+## Advantages
+
+**Spectral-like Resolution**
+- Better resolution of high-frequency components
+- Reduced numerical dispersion
+- Improved accuracy per grid point
+
+**Computational Benefits**
+- Smaller stencil size compared to explicit schemes
+- Better handling of boundary conditions
+- Enhanced stability properties
+
 
 **Nonstandard Finite Differences**
 These methods are specifically designed for certain types of problems where traditional schemes might fail. They can preserve important properties like positivity and boundedness of solutions[8].
@@ -219,5 +243,6 @@ The choice of finite difference method should be guided by the specific requirem
 1. Thomée, V. (2001). From finite differences to finite elements a short history of numerical analysis of partial differential equations. Journal of Computational and Applied Mathematics, 128, 1-54. https://www.sciencedirect.com/science/article/pii/S0377042700005070?via%3Dihub
 2. Thomas, J.W. (1997) Numerical Partial Differential Equations: Finite Difference Methods. Springer-Verlag, Berlin.
 3. Almeida Magalhães, A.L.M., Brito, P.P., Lamon, G.P.d.S., Júnior, P.A.A.M., Magalhães, C.A., Almeida Magalhães P.H.M., Magalhães P.A.A. (2024). Numerical Resolution of Differential Equations Using the Finite Difference Method in the Real and Complex Domain. Mathematics. 12(12):1870. https://doi.org/10.3390/math12121870
-4. Loeb, D.E., & Rota, G. (1995). Recent contributions to the calculus of finite differences: a survey. arXiv: Combinatorics. https://doi.org/10.48550/arXiv.math/9502210
-5. Bournez, O. (2019). Complexity theory with Discrete Differential Equations/Finite differences. https://api.semanticscholar.org/CorpusID:14799803
+4. Lele, S.K. (1992). Compact finite difference schemes with spectral-like resolution. Journal of Computational Physics. 103, 1:16-42. https://doi.org/10.1016/0021-9991(92)90324-R.
+5. Loeb, D.E., & Rota, G. (1995). Recent contributions to the calculus of finite differences: a survey. arXiv: Combinatorics. https://doi.org/10.48550/arXiv.math/9502210
+6. Bournez, O. (2019). Complexity theory with Discrete Differential Equations/Finite differences. https://api.semanticscholar.org/CorpusID:14799803
