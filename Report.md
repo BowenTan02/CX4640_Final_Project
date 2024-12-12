@@ -50,11 +50,15 @@ The truncation of the Taylor series in finite difference approximations introduc
 
 ## Finite-Difference-Methods-Options
 
-**Forward Differences**
-The forward difference approximation looks ahead in the grid:
-```python
-f'(x) ≈ (f(x + h) - f(x)) / h
-```
+### Forward Differences
+For forward differences with step size *h*, we can express the Taylor expansion series as:
+
+$$ f(x + h) = f(x) + hf'(x) + \frac{h^2}{2!}f''(x) + \frac{h^3}{3!}f'''(x) + ...$$
+
+Rearranging this series to isolate *f'(x)* yields:
+
+$$ f'(x) = \frac{f(x+h) - f(x)}{h} - \frac{h}{2}f''(x) - \frac{h^2}{6}f'''(x) + O(h^3) $$
+
 
 **Backward Differences**
 The backward difference uses previous points:
@@ -120,7 +124,7 @@ def central_difference_2nd_order(f, x, h):
 The choice of finite difference method should be guided by the specific requirements of the problem, including accuracy needs, computational resources, and the nature of the solution being sought.
 
 ## References:
-1. https://arxiv.org/abs/2003.03951
+1. Thomas, J.W. (1997) Numerical Partial Differential Equations: Finite Difference Methods. Springer-Verlag, Berlin.
 2. https://www.semanticscholar.org/paper/d79e1ecc3b689c443568d30ee439291740572785
 3. https://www.semanticscholar.org/paper/10516540740b17914254479267d6afe416f7f54d
 4. https://www.semanticscholar.org/paper/3e141a8c2701f7e147849e96ce79a4753055f90e
