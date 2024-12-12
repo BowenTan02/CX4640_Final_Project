@@ -1,6 +1,6 @@
 ---
 Name: Bowen Tan
-Topic: #30 Finite Difference Methods
+Topic: No. 30 Finite Difference Methods
 Title: Background, Types, and Applications of Finite Difference Methods
 ---
 # Finite Differences
